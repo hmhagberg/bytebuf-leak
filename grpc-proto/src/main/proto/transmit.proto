@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package transmit;
+
+option java_package = "node.stubs";
+
+
+message DataChunk {
+    bytes data = 1;
+}
+
+message StatusResponse {
+    enum Status {
+        DONE = 0;
+        ERROR = 1;
+    };
+    Status status = 1;
+}
+
+service TransmitService {
+    rpc Transmit (stream DataChunk) returns (StatusResponse);
+}
